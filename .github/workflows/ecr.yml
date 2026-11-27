@@ -1,4 +1,4 @@
-# Testing GitHub Actions trigger
+
 name: Docker Build and Push to ECR - Main  
 
 on:
