@@ -42,7 +42,7 @@ class NavBar extends Component {
           <div className="row">
             <div className="col-lg-12 text-right">
               <div className="logo_container">
-                <Link to="/fashion-cube">
+                <Link to="/">
                   Fashion<span>Cube</span>
                 </Link>
               </div>
