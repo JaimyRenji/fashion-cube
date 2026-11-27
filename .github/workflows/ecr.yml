@@ -72,7 +72,25 @@ jobs:
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
+      - name: Verify EC2 and SSM instance
+        env:
+          EC2_INSTANCE_ID: ${{ vars.EC2_INSTANCE_ID }}
+        run: |
+          echo "Checking AWS identity"
+          aws sts get-caller-identity
 
+          echo "Checking EC2 instance"
+          aws ec2 describe-instances \
+            --instance-ids "$EC2_INSTANCE_ID" \
+            --region "$AWS_REGION" \
+            --query "Reservations[].Instances[].{ID:InstanceId,State:State.Name,Region:Placement.AvailabilityZone}" \
+            --output table
+
+          echo "Checking SSM registration"
+          aws ssm describe-instance-information \
+            --filters "Key=InstanceIds,Values=$EC2_INSTANCE_ID" \
+            --region "$AWS_REGION" \
+            --output table
       - name: Deploy Docker image to EC2 using SSM
         shell: bash
         env:
