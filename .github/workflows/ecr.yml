@@ -49,4 +49,4 @@ jobs:
             VITE_WS_URL=wss://${{ vars.DOMAIN }}/api
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:frontend-${{ github.sha }}
-```
+
