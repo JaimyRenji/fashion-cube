@@ -14,7 +14,7 @@ function SingleProduct(props) {
       <div
         className="product discount product_filter"
         onClick={() =>
-          jumpTo(`/fashion-cube/single-product/${productItem._id}`)
+          jumpTo(`/single-product/${productItem._id}`)
         }
       >
         <div className="product_image">
